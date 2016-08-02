@@ -29,6 +29,10 @@ func init() {
 	// fmt.Printf("%s\n", v["tv"])
 }
 
+func GetList() map[string]string {
+	return v
+}
+
 func Get(key string) string {
 	return v[key]
 }
