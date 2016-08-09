@@ -9,7 +9,14 @@ import (
 )
 
 var firebase firego.Firebase
-var v map[string]string
+
+type Irdata struct {
+	Name   string `json:"name"`
+	Detail string `json:"detail"`
+	Data   string `json:"data"`
+}
+
+var v map[string]Irdata
 
 func init() {
 
@@ -25,14 +32,14 @@ func init() {
 	if err := firebase.Value(&v); err != nil {
 		log.Fatal(err)
 	}
-	// fmt.Printf("%s\n", v)
-	// fmt.Printf("%s\n", v["tv"])
+	fmt.Printf("%s\n", v)
+	fmt.Printf("%v\n", v["tv"])
 }
 
-func GetList() map[string]string {
+func GetList() map[string]Irdata {
 	return v
 }
 
-func Get(key string) string {
+func Get(key string) Irdata {
 	return v[key]
 }
