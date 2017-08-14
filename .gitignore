@@ -25,4 +25,8 @@ _testmain.go
 
 debug
 .vscode/
-config.json
+**/config.json
+**/config.toml
+.idea/
+
+

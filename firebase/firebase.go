@@ -19,7 +19,6 @@ type Irdata struct {
 var v map[string]Irdata
 
 func init() {
-
 	viper.SetConfigName("config") // 設定ファイル名を拡張子抜きで指定する
 	viper.AddConfigPath(".")      // 現在のワーキングディレクトリを探索することもできる
 	err := viper.ReadInConfig()   // 設定ファイルを探索して読み取る
