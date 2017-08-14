@@ -18,6 +18,11 @@ type SlackConfig struct {
 	Token string
 }
 
+// Behavior is
+type Behavior interface {
+	Check(msg *slack.MessageEvent, rtm *slack.RTM)
+}
+
 func main() {
 	//read config file
 	var config Config
@@ -26,7 +31,12 @@ func main() {
 		fmt.Printf("Can't read config.toml file")
 		return
 	}
-	fmt.Println(config.SlackConfig.Token)
+
+	behaiviors := []Behavior{}
+
+	tv := NewTV()
+
+	behaiviors = append(behaiviors, tv)
 
 	//create slack app
 	api := slack.New(config.SlackConfig.Token)
@@ -52,6 +62,10 @@ func main() {
 
 		case *slack.MessageEvent:
 			fmt.Printf("Message: %v\n", ev)
+
+			for _, v := range behaiviors {
+				v.Check(ev, rtm)
+			}
 
 		case *slack.PresenceChangeEvent:
 			fmt.Printf("Presence Change: %v\n", ev)
